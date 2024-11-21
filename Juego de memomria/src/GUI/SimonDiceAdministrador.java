@@ -236,7 +236,7 @@ javax.swing.ButtonModel modeloSeleccionado = grupoSimonDice.getSelection();
         
     }
 
-    dificultad = ControlNivel.getValue();
+    dificultad = ControlNivel.getValue()*2;
 
     mapas = new MapaSimonDice(mapa, dificultad);
 

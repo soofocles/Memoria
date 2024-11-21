@@ -24,19 +24,19 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     public Render renderizado;
     public static SimonDice simon;
     public static final int width = 800, height = 800;
-    private static int flash = 0, ticks, oscuro, indicePatron, maximo = 8, color = 1,velocidad;
+    private static int flash = 0, ticks, oscuro, indicePatron, maximo = 8, color = 6;
     public static boolean patronCreado = true;
+    private static double velocidad = 15;
     public static ArrayList<Integer> patronJuego = new ArrayList<>();
     public static Random random;
     private boolean gameOver;
-    private static boolean esperandoPatron = false, esGanador = false;
+    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = true;
     private static int tiempoSegundos = 0;
     private long startTime;
     private long elapsedTime;
     private Timer cronometro;
     private int patronesConseguidos = 0;
     private JDesktopPane desktopPane;
-
 
     private boolean isTimerRunning;
 
@@ -71,7 +71,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!isTimerRunning) {
-                    return; 
+                    return;
                 }
             }
         });
@@ -88,6 +88,10 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     }
 
     public static void main(String[] args) {
+        if (modoSupervivencia == true){
+            maximo = 100;
+            color = 4;
+        }
         simon = new SimonDice();
     }
 
@@ -105,12 +109,13 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (isTimerRunning) {
             elapsedTime = System.currentTimeMillis() - startTime;
         }
         ticks++;
 
-        if (ticks % 10 == 0) {
+        if (ticks % velocidad == 0) {
             flash = 0;
             if (oscuro >= 0) {
                 oscuro--;
@@ -126,7 +131,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
                             patronCreado = true;
                             return;
                         }
-                        flash = random.nextInt(8) + 1;
+                        flash = random.nextInt(color) + 1;
                         patronJuego.add(flash);
                         indicePatron = 0;
                         patronCreado = false;
@@ -155,8 +160,8 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         int circleHeight = 1000 / 2;
         int offsetX = 0;
         int offsetY = 5;
-        int centerX = offsetX + circleWidth / 2;;
-        int centerY = offsetY + circleHeight / 2;;
+        int centerX = offsetX + circleWidth / 2;
+        int centerY = offsetY + circleHeight / 2;
 
         Color colorCustonMagenta = new Color(204, 169, 221);
         Color colorCustomCafe = new Color(161, 130, 98);
@@ -167,62 +172,44 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         // Fondo negro
         grafico.setColor(colorNegroClaro);
         grafico.fillRect(0, 0, width, height);
-        
-        switch (color) {
-            case 1:
-                
-        grafico.setColor(flash == 1 ? Color.GREEN : Color.GREEN.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 0, 45);
 
-        grafico.setColor(flash == 2 ? Color.YELLOW : Color.YELLOW.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 45, 45);
+        // Número de colores (sectores)
+        int numColores = color; // Variable que define cuántos sectores tiene el círculo
 
-        grafico.setColor(flash == 3 ? Color.BLUE : Color.BLUE.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 90, 45);
+        // Colores para cada sector
+        Color[] colores = {
+            Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED ,
+            Color.CYAN, Color.PINK, colorCustomCafe,colorCustonMagenta
+        };
 
-        grafico.setColor(flash == 4 ? colorCustonMagenta : colorCustonMagenta.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 135, 45);
+        int anguloSector = 360 / numColores;
+        for (int i = 0; i < numColores; i++) {
+            grafico.setColor(flash == (i + 1) ? colores[i] : colores[i].darker());
+            grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, i * anguloSector, anguloSector);
+        }
 
-        grafico.setColor(flash == 5 ? Color.CYAN : Color.CYAN.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 180, 45);
-
-        grafico.setColor(flash == 6 ? Color.PINK : Color.PINK.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 225, 45);
-
-        grafico.setColor(flash == 7 ? colorCustomCafe : colorCustomCafe.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 270, 45);
-
-        grafico.setColor(flash == 8 ? Color.RED : Color.RED.darker());
-        grafico.fillArc(offsetX, offsetY, circleWidth, circleHeight, 315, 45);
-
-        // Dibujar el rectángulo central negro
         grafico.setColor(Color.BLACK);
-        int rectSize = circleWidth / 2; // Ajustar tamaño del rectángulo central
+        int rectSize = circleWidth / 2;
         grafico.fillRoundRect(offsetX + rectSize / 2, offsetY + rectSize / 2, rectSize, rectSize, rectSize, rectSize);
 
-        // Dibujar líneas divisorias
         grafico.setColor(Color.BLACK);
         grafico.setStroke(new BasicStroke(10));
         int radius = circleWidth / 2;
 
-        for (int i = 0; i < 8; i++) {
-            double angle = Math.toRadians(i * 45); // Ángulo de cada división
+        for (int i = 0; i < color; i++) {
+            double angle = Math.toRadians(i * anguloSector);
             int endX = centerX + (int) (radius * Math.cos(angle));
             int endY = centerY + (int) (radius * Math.sin(angle));
             grafico.drawLine(centerX, centerY, endX, endY);
         }
 
-        grafico.setColor(Color.BLACK); // Color del borde
-        grafico.setStroke(new BasicStroke(10)); // Grosor del borde
+        grafico.setColor(Color.BLACK);
+        grafico.setStroke(new BasicStroke(10));
         grafico.drawOval(offsetX, offsetY, circleWidth, circleHeight);
-        
-            break;
-            default:
-        }
+
         grafico.setFont(new Font("Arial", Font.BOLD, 70));
         grafico.setColor(Color.WHITE);
 
-// Convertir tiempo a formato mm:ss
         long seconds = (elapsedTime / 1000) % 60;
         long minutes = (elapsedTime / 1000) / 60;
 
@@ -236,23 +223,13 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         grafico.setColor(Color.WHITE);
         if (gameOver) {
             String mensaje = esGanador ? "¡Ganaste!" : ":(";
-            if (esGanador == true) {
-                grafico.setFont(new Font("Arial", Font.ITALIC, 130));
-                textX = centerX - 100;
-                textY = centerY;
-                grafico.drawString(mensaje, textX, textY);
-            } else if (esGanador == false) {
-                grafico.setFont(new Font("Arial", Font.BOLD, 120));
-                textX = centerX - 50;
-                textY = centerY + 40;
-                grafico.drawString(mensaje, textX, textY);
-            }
-
+            grafico.setFont(new Font("Arial", esGanador ? Font.ITALIC : Font.BOLD, 130));
+            textX = centerX - (esGanador ? 100 : 50);
+            textY = centerY + (esGanador ? 0 : 40);
+            grafico.drawString(mensaje, textX, textY);
         } else {
             grafico.setFont(new Font("Arial", Font.BOLD, 100));
             grafico.setColor(Color.WHITE);
-            textX = offsetX + circleWidth + 50;
-            textY = offsetY + circleHeight / 2;
             grafico.drawString(indicePatron + "/" + patronJuego.size(), width - 200, 300);
         }
     }
@@ -267,7 +244,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             if (esGanador) {
                 System.out.println("¡Ganaste!");
             } else {
-                System.out.println(":("); // Perdiste 
+                System.out.println(":(");
             }
             if (isTimerRunning) {
                 isTimerRunning = false;
@@ -300,30 +277,124 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         }
 
         int colorIndex = -1;
-        if (angulo >= 0 && angulo < Math.PI / 4) {
-            colorIndex = 8;
-            flash = 8;
-        } else if (angulo >= Math.PI / 4 && angulo < Math.PI / 2) {
-            colorIndex = 7;
-            flash = 7;
-        } else if (angulo >= Math.PI / 2 && angulo < 3 * Math.PI / 4) {
-            colorIndex = 6;
-            flash = 6;
-        } else if (angulo >= 3 * Math.PI / 4 && angulo < Math.PI) {
-            colorIndex = 5;
-            flash = 5;
-        } else if (angulo >= Math.PI && angulo < 5 * Math.PI / 4) {
-            colorIndex = 4;
-            flash = 4;
-        } else if (angulo >= 5 * Math.PI / 4 && angulo < 3 * Math.PI / 2) {
-            colorIndex = 3;
-            flash = 3;
-        } else if (angulo >= 3 * Math.PI / 2 && angulo < 7 * Math.PI / 4) {
-            colorIndex = 2;
-            flash = 2;
-        } else {
-            colorIndex = 1;
-            flash = 1;
+
+        switch (color) {
+            case 4:
+
+                if (angulo >= 0 && angulo < Math.PI / 2) {
+                    colorIndex = 4;
+                    flash = 4;
+                } else if (angulo >= Math.PI / 2 && angulo < Math.PI) {
+                    colorIndex = 3;
+                    flash = 3;
+                } else if (angulo >= Math.PI && angulo < 3 * Math.PI / 2) {
+                    colorIndex = 2;
+                    flash = 2;
+                } else {
+                    colorIndex = 1;
+                    flash = 1;
+                }
+                break;
+            case 5:
+
+                if (angulo >= 0 && angulo < 2 * Math.PI / 5) {
+                    colorIndex = 5;
+                    flash = 5;
+                } else if (angulo >= 2 * Math.PI / 5 && angulo < 4 * Math.PI / 5) {
+                    colorIndex = 4;
+                    flash = 4;
+                } else if (angulo >= 4 * Math.PI / 5 && angulo < 6 * Math.PI / 5) {
+                    colorIndex = 3;
+                    flash = 3;
+                } else if (angulo >= 6 * Math.PI / 5 && angulo < 8 * Math.PI / 5) {
+                    colorIndex = 2;
+                    flash = 2;
+                } else {
+                    colorIndex = 1;
+                    flash = 1;
+                }
+
+                break;
+            case 6:
+
+                if (angulo >= 0 && angulo < Math.PI / 3) {
+                    colorIndex = 6;
+                    flash = 6;
+                } else if (angulo >= Math.PI / 3 && angulo < 2 * Math.PI / 3) {
+                    colorIndex = 5;
+                    flash = 5;
+                } else if (angulo >= 2 * Math.PI / 3 && angulo < Math.PI) {
+                    colorIndex = 4;
+                    flash = 4;
+                } else if (angulo >= Math.PI && angulo < 4 * Math.PI / 3) {
+                    colorIndex = 3;
+                    flash = 3;
+                } else if (angulo >= 4 * Math.PI / 3 && angulo < 5 * Math.PI / 3) {
+                    colorIndex = 2;
+                    flash = 2;
+                } else {
+                    colorIndex = 1;
+                    flash = 1;
+                }
+
+                break;
+            case 7:
+
+                if (angulo >= 0 && angulo < Math.PI / 7) {
+                    colorIndex = 7;
+                    flash = 7;
+                } else if (angulo >= Math.PI / 7 && angulo < 2 * Math.PI / 7) {
+                    colorIndex = 6;
+                    flash = 6;
+                } else if (angulo >= 2 * Math.PI / 7 && angulo < 3 * Math.PI / 7) {
+                    colorIndex = 5;
+                    flash = 5;
+                } else if (angulo >= 3 * Math.PI / 7 && angulo < 4 * Math.PI / 7) {
+                    colorIndex = 4;
+                    flash = 4;
+                } else if (angulo >= 4 * Math.PI / 7 && angulo < 5 * Math.PI / 7) {
+                    colorIndex = 3;
+                    flash = 3;
+                } else if (angulo >= 5 * Math.PI / 7 && angulo < 6 * Math.PI / 7) {
+                    colorIndex = 2;
+                    flash = 2;
+                } else {
+                    colorIndex = 1;
+                    flash = 1;
+                }
+
+                break;
+            case 8:
+
+                if (angulo >= 0 && angulo < Math.PI / 4) {
+                    colorIndex = 8;
+                    flash = 8;
+                } else if (angulo >= Math.PI / 4 && angulo < Math.PI / 2) {
+                    colorIndex = 7;
+                    flash = 7;
+                } else if (angulo >= Math.PI / 2 && angulo < 3 * Math.PI / 4) {
+                    colorIndex = 6;
+                    flash = 6;
+                } else if (angulo >= 3 * Math.PI / 4 && angulo < Math.PI) {
+                    colorIndex = 5;
+                    flash = 5;
+                } else if (angulo >= Math.PI && angulo < 5 * Math.PI / 4) {
+                    colorIndex = 4;
+                    flash = 4;
+                } else if (angulo >= 5 * Math.PI / 4 && angulo < 3 * Math.PI / 2) {
+                    colorIndex = 3;
+                    flash = 3;
+                } else if (angulo >= 3 * Math.PI / 2 && angulo < 7 * Math.PI / 4) {
+                    colorIndex = 2;
+                    flash = 2;
+                } else {
+                    colorIndex = 1;
+                    flash = 1;
+                }
+
+                break;
+            default:
+                throw new AssertionError();
         }
 
         System.out.println("Clic en el color: " + colorIndex);
@@ -333,25 +404,49 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             indicePatron++;
 
             if (indicePatron == patronJuego.size()) {
-                if (patronJuego.size() >= maximo) {
-                    gameOver = true;
-                    esGanador = true; // Marcamos que el jugador ganó
-                } else {
-                    Timer espera = new Timer(200, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (!gameOver) {
-                                patronCreado = true;
-                                flash = 0;
-                                indicePatron = 0;
-                                renderizado.repaint();
-                            }
-                        }
-                    });
-                    espera.setRepeats(false);
-                    espera.start();
+                if (indicePatron == patronJuego.size()) {
+    if (patronJuego.size() >= maximo) {
+        gameOver = true;
+        esGanador = true; // Marcamos que el jugador ganó
+    } else {
+        // Cambiar configuración según la dificultad
+        if (modoSupervivencia) {
+            if (patronJuego.size() < 5) {
+                color = 4;
+                velocidad = 15;
+            } else if (patronJuego.size() < 10) {
+                color = 5;
+                velocidad = 1.5;
+            } else if (patronJuego.size() < 15) {
+                color = 6;
+                velocidad = 11;
+            } else if (patronJuego.size() < 20) {
+                color = 7;
+                velocidad = 9;
+            } else {
+                color = 8;
+                velocidad = 7.5;
+            }
+        }
+
+        // Preparar para el próximo patrón
+        Timer espera = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!gameOver) {
+                    patronCreado = true;
+                    flash = 0;
+                    indicePatron = 0;
+                    renderizado.repaint();
                 }
             }
+        });
+        espera.setRepeats(false);
+        espera.start();
+    }
+}
+            }
+
         } else {
             gameOver = true;
             esGanador = false;
@@ -371,4 +466,6 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
+
+
 }
