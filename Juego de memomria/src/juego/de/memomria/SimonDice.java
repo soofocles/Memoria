@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,6 +18,8 @@ import java.util.Random;
 import java.util.TimerTask;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class SimonDice extends JFrame implements ActionListener, MouseListener {
@@ -31,13 +34,15 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     public static ArrayList<Integer> patronJuego = new ArrayList<>();
     public static Random random;
     private boolean gameOver;
-    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = true;
+    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = false;
     private static int tiempoSegundos = 0;
     private long startTime;
     private long elapsedTime;
     private Timer cronometro;
     private int patronesConseguidos = 0;
     private JDesktopPane desktopPane;
+    private JPanel Panel;
+    private JFrame frame;
 
     private boolean isTimerRunning;
 
@@ -56,10 +61,13 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
 
     public SimonDice() {
         // Crear la ventana principal (JFrame)
-        JFrame frame = new JFrame("Simon");
+        frame = new JFrame("Simon");
+        Panel = new JPanel();
+        
         Timer tiepo = new Timer(25, this);
         renderizado = new Render();
- 
+        frame.add(Panel);
+        
         if (modoSupervivencia == true){
             maximo = 100;
             color = 4;
@@ -71,12 +79,21 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         }
         // Configurar la ventana
         frame.setSize(width, 549);
-        frame.setVisible(true);
+        
         frame.addMouseListener(this);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.add(renderizado);
+        frame.add(getRenderPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        this.add(Panel = new JPanel());
+        
+        
+       renderizado.repaint();
+        
+        Timer tiempos = new Timer(16, e -> renderizado.repaint());
+        
+        tiempos.start();
 
         cronometro = new Timer(1000, new ActionListener() {
             @Override
@@ -88,6 +105,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         });
         
         
+         
 
         // Iniciar el juego
         Iniciar();
@@ -98,6 +116,10 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         isTimerRunning = true;  // Cronómetro está activo
         tiepo.start();
         cronometro.start();  // Iniciar cronómetro
+    }
+    
+    public Render getRenderPanel() {
+        return renderizado;
     }
 
     public static void main(String[] args) {
@@ -111,7 +133,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         oscuro = 2;
         flash = 0;
         ticks = 0;
-
+        frame.setVisible(true);
         startTime = System.currentTimeMillis();
         isTimerRunning = true;
 
@@ -161,7 +183,13 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             isTimerRunning = false; // Detenemos el cronómetro si el juego terminó
         }
 
+        SwingUtilities.invokeLater(new Runnable() {
+    public void run() {
+        
         renderizado.repaint();
+        
+    }
+});
     }
 
     void paint(Graphics2D grafico) {
@@ -173,6 +201,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         int centerX = offsetX + circleWidth / 2;
         int centerY = offsetY + circleHeight / 2;
 
+        
         Color colorCustonMagenta = new Color(204, 169, 221);
         Color colorCustomCafe = new Color(161, 130, 98);
         Color colorNegroClaro = new Color(51, 51, 51);

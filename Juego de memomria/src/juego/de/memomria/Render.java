@@ -13,8 +13,11 @@ class Render extends JPanel{
         if(SimonDice.simon != null){
         SimonDice.simon.paint((Graphics2D) g);
         }
+
+    } 
+    
+    @Override
+    public void repaint() {
+        super.repaint();  // Llama a repaint() de JPanel
     }
-    
-    
-    
 }

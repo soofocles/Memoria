@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import java.awt.Graphics2D;
+import juego.de.memomria.JuegoPalabras;
+import juego.de.memomria.Operaciones;
 import juego.de.memomria.SimonDice;
 
 /**
@@ -30,7 +33,8 @@ public class JuegosNormal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         JUegoSimonDice = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ABCBoton = new javax.swing.JButton();
+        OperacionesBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,12 +50,21 @@ public class JuegosNormal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ABC.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ABCBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ABC.png"))); // NOI18N
+        ABCBoton.setBorderPainted(false);
+        ABCBoton.setContentAreaFilled(false);
+        ABCBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ABCBotonActionPerformed(evt);
+            }
+        });
+
+        OperacionesBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Operaciones.png"))); // NOI18N
+        OperacionesBoton.setBorderPainted(false);
+        OperacionesBoton.setContentAreaFilled(false);
+        OperacionesBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OperacionesBotonActionPerformed(evt);
             }
         });
 
@@ -62,20 +75,24 @@ public class JuegosNormal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(JUegoSimonDice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(OperacionesBoton)
+                .addGap(68, 68, 68)
+                .addComponent(ABCBoton)
                 .addGap(83, 83, 83))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(JUegoSimonDice))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(jButton1)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(OperacionesBoton)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(147, 147, 147)
+                            .addComponent(JUegoSimonDice))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(196, 196, 196)
+                            .addComponent(ABCBoton))))
                 .addContainerGap(244, Short.MAX_VALUE))
         );
 
@@ -99,12 +116,31 @@ public class JuegosNormal extends javax.swing.JFrame {
 
     private void JUegoSimonDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JUegoSimonDiceActionPerformed
         
-        SimonDice juego = new SimonDice();
+        this.dispose();
+        SimonDice simonDice = new SimonDice();
+        
+
+        simonDice.setLocationRelativeTo(null);
+        simonDice.setVisible(true);
+        
+        
     }//GEN-LAST:event_JUegoSimonDiceActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ABCBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABCBotonActionPerformed
+      
+        JuegoPalabras juego = new JuegoPalabras();
+        juego.Iniciar();
+        
+    }//GEN-LAST:event_ABCBotonActionPerformed
+
+    private void OperacionesBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OperacionesBotonActionPerformed
+        
+        this.dispose();
+        
+        Operaciones operar = new Operaciones();
+        operar.Iniciar();
+        
+    }//GEN-LAST:event_OperacionesBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,8 +178,9 @@ public class JuegosNormal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ABCBoton;
     private javax.swing.JButton JUegoSimonDice;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton OperacionesBoton;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
