@@ -1,16 +1,20 @@
 package GUI;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ButtonGroup;
 import juego.de.memomria.MapaSimonDice;
+import juego.de.memomria.SimonDice;
 
 public class SimonDiceAdministrador extends javax.swing.JFrame {
 
-    int mapa;
-    int dificultad;
-    private static MapaSimonDice mapas;
+    int mapa = 4;
+    int dificultadSeleccionada = 1;
+    double VelocidadFinal;
+    private SimonDice simonDice;
+    private MapaSimonDice mapaSimonDice;
 
     public SimonDiceAdministrador() {
+        
         initComponents();
         agrupar();
     }
@@ -97,6 +101,11 @@ public class SimonDiceAdministrador extends javax.swing.JFrame {
         SalirSimonAdministrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salida pequemio.png"))); // NOI18N
         SalirSimonAdministrador.setBorderPainted(false);
         SalirSimonAdministrador.setContentAreaFilled(false);
+        SalirSimonAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirSimonAdministradorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,13 +245,55 @@ javax.swing.ButtonModel modeloSeleccionado = grupoSimonDice.getSelection();
         
     }
 
-    dificultad = ControlNivel.getValue()*2;
-
-    mapas = new MapaSimonDice(mapa, dificultad);
-
-            System.out.println(mapas.toString());
-
+    dificultadSeleccionada = ControlNivel.getValue();
+    
+        switch (dificultadSeleccionada) {
+            case 1:
+                VelocidadFinal = 15;
+                break;
+                case 2:
+                VelocidadFinal = 13.5;
+                break;
+                case 3:
+                VelocidadFinal = 12;
+                break;
+                case 4:
+                VelocidadFinal = 10.5;
+                break;
+                case 5:
+                VelocidadFinal = 9;
+                break;
+                case 6:
+                VelocidadFinal = 7.5;
+                break;
+                case 7:
+                VelocidadFinal = 6;
+                break;
+                case 8:
+                VelocidadFinal = 4.5;
+                break;
+                case 9:
+                VelocidadFinal = 3;
+                break;
+                case 10:
+                VelocidadFinal = 1.5;
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+        mapaSimonDice = new MapaSimonDice();
+        mapaSimonDice.setMapa(mapa);
+        mapaSimonDice.setDificultad(VelocidadFinal);
     }//GEN-LAST:event_GuardarSimonDiceActionPerformed
+
+    private void SalirSimonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirSimonAdministradorActionPerformed
+        this.dispose();
+        
+        JuegosAdministrador juegos = new JuegosAdministrador();
+        juegos.setVisible(true);
+        juegos.setLocationRelativeTo(null);
+    }//GEN-LAST:event_SalirSimonAdministradorActionPerformed
 
     public static void main(String args[]) {
 

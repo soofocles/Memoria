@@ -142,7 +142,13 @@ public class JuegosAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JUegoSimonDiceAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JUegoSimonDiceAdministradorActionPerformed
-        // TODO add your handling code here:
+        
+        this.dispose();
+        
+        SimonDiceAdministrador simonAdministrador = new SimonDiceAdministrador();
+        simonAdministrador.setVisible(true);
+        simonAdministrador.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_JUegoSimonDiceAdministradorActionPerformed
 
     private void PalabrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PalabrasActionPerformed

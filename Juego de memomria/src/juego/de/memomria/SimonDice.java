@@ -22,6 +22,7 @@ import javax.swing.Timer;
 public class SimonDice extends JFrame implements ActionListener, MouseListener {
 
     public Render renderizado;
+    static public MapaSimonDice mapaSimonDice;
     public static SimonDice simon;
     public static final int width = 800, height = 800;
     private static int flash = 0, ticks, oscuro, indicePatron, maximo = 8, color = 6;
@@ -58,12 +59,22 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         JFrame frame = new JFrame("Simon");
         Timer tiepo = new Timer(25, this);
         renderizado = new Render();
-
+ 
+        if (modoSupervivencia == true){
+            maximo = 100;
+            color = 4;
+        }else {
+         mapaSimonDice = new MapaSimonDice();
+        
+        color = mapaSimonDice.getMapa();
+        velocidad = mapaSimonDice.getDificultad();
+        }
         // Configurar la ventana
         frame.setSize(width, 549);
         frame.setVisible(true);
         frame.addMouseListener(this);
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.add(renderizado);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -75,6 +86,8 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
                 }
             }
         });
+        
+        
 
         // Iniciar el juego
         Iniciar();
@@ -88,10 +101,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     }
 
     public static void main(String[] args) {
-        if (modoSupervivencia == true){
-            maximo = 100;
-            color = 4;
-        }
+        
         simon = new SimonDice();
     }
 

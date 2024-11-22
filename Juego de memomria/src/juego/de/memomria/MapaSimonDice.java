@@ -3,13 +3,9 @@ package juego.de.memomria;
 
 public class MapaSimonDice {
     
-    int mapa;
-    int Dificultad;
+    int mapa = 4;
+    double Dificultad = 15;
 
-    public MapaSimonDice(int mapa, int Dificultad) {
-        this.mapa = mapa;
-        this.Dificultad = Dificultad;
-    }
 
     public int getMapa() {
         return mapa;
@@ -19,11 +15,11 @@ public class MapaSimonDice {
         this.mapa = mapa;
     }
 
-    public int getDificultad() {
+    public double getDificultad() {
         return Dificultad;
     }
 
-    public void setDificultad(int Dificultad) {
+    public void setDificultad(double Dificultad) {
         this.Dificultad = Dificultad;
     }
 
