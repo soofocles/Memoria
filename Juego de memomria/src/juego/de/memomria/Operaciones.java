@@ -27,7 +27,23 @@ public class Operaciones extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null); // Usamos diseño absoluto
         setLocationRelativeTo(null);
-
+        
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menuDificultad = new JMenu("Dificultad");
+        JMenuItem facil = new JMenuItem("Fácil");
+        JMenuItem normal = new JMenuItem("Normal");
+        JMenuItem dificil = new JMenuItem("Difícil");
+        
+        facil.addActionListener(e -> cambiarDificultad(3));  // 3 elementos
+        normal.addActionListener(e -> cambiarDificultad(5));  // 5 elementos
+        dificil.addActionListener(e -> cambiarDificultad(7));  // 7 elementos
+        
+        menuDificultad.add(facil);
+        menuDificultad.add(normal);
+        menuDificultad.add(dificil);
+        menuBar.add(menuDificultad);
+        setJMenuBar(menuBar);
+        
         // Inicializar componentes
         cuadroDeTexto = new JLabel("Haz clic en 'Iniciar' para comenzar.");
         cuadroDeTexto.setBounds(50, 40, 400, 150); // Posición y tamaño del label
@@ -72,6 +88,11 @@ public class Operaciones extends JFrame {
                 verificarRespuesta();
             }
         });
+    }
+    
+    private void cambiarDificultad(int elementos) {
+        numElementos = elementos;
+        JOptionPane.showMessageDialog(this, "Dificultad cambiada a " + (elementos == 3 ? "Fácil" : (elementos == 5 ? "Normal" : "Difícil")));
     }
 
     public void iniciarJuego() {
