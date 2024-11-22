@@ -117,11 +117,11 @@ public class JuegosNormal extends javax.swing.JFrame {
     private void JUegoSimonDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JUegoSimonDiceActionPerformed
         
         this.dispose();
-        SimonDice simonDice = new SimonDice();
+        boolean iniciandojuego = true;
+        SimonDice simonDice = new SimonDice(iniciandojuego);
+        
         
 
-        simonDice.setLocationRelativeTo(null);
-        simonDice.setVisible(true);
         
         
     }//GEN-LAST:event_JUegoSimonDiceActionPerformed

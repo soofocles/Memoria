@@ -11,8 +11,7 @@ package juego.de.memomria;
 public class Preuba {
     
     public static void main(String[] args) {
-        
-        SimonDice simon = new SimonDice();
+
         
     }
     

@@ -34,7 +34,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     public static ArrayList<Integer> patronJuego = new ArrayList<>();
     public static Random random;
     private boolean gameOver;
-    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = false;
+    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = false, iniciandoJuego = true;
     private static int tiempoSegundos = 0;
     private long startTime;
     private long elapsedTime;
@@ -59,7 +59,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         colores.put(8, "Color Personalizado");
     }
 
-    public SimonDice() {
+    public SimonDice(boolean iniciandoJuego) {
         // Crear la ventana principal (JFrame)
         frame = new JFrame("Simon");
         Panel = new JPanel();
@@ -67,6 +67,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         Timer tiepo = new Timer(25, this);
         renderizado = new Render();
         frame.add(Panel);
+        this.add(renderizado);
         
         if (modoSupervivencia == true){
             maximo = 100;
@@ -124,7 +125,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
 
     public static void main(String[] args) {
         
-        simon = new SimonDice();
+        simon = new SimonDice(iniciandoJuego);
     }
 
     public void Iniciar() {
@@ -134,6 +135,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         flash = 0;
         ticks = 0;
         frame.setVisible(true);
+        renderizado.repaint();
         startTime = System.currentTimeMillis();
         isTimerRunning = true;
 
@@ -193,6 +195,10 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     }
 
     void paint(Graphics2D grafico) {
+        
+        while (iniciandoJuego == true) {            
+            
+        
 
         int circleWidth = 1000 / 2;
         int circleHeight = 1000 / 2;
@@ -270,6 +276,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             grafico.setFont(new Font("Arial", Font.BOLD, 100));
             grafico.setColor(Color.WHITE);
             grafico.drawString(indicePatron + "/" + patronJuego.size(), width - 200, 300);
+        }
         }
     }
 
