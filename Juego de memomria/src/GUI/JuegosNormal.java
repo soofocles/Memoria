@@ -6,6 +6,7 @@ package GUI;
 
 import java.awt.Graphics2D;
 import juego.de.memomria.JuegoPalabras;
+import juego.de.memomria.MapaSimonDice;
 import juego.de.memomria.Operaciones;
 import juego.de.memomria.SimonDice;
 
@@ -31,10 +32,16 @@ public class JuegosNormal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TituloJuegosAdministrador1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         JUegoSimonDice = new javax.swing.JButton();
         ABCBoton = new javax.swing.JButton();
         OperacionesBoton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        TituloJuegosAdministrador = new javax.swing.JLabel();
+
+        TituloJuegosAdministrador1.setFont(new java.awt.Font("Gramatika-BlackItalic", 1, 60)); // NOI18N
+        TituloJuegosAdministrador1.setText("Juegos");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,15 +75,24 @@ public class JuegosNormal extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 60)); // NOI18N
+        jLabel1.setText("Juegos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(JUegoSimonDice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(OperacionesBoton)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(JUegoSimonDice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addComponent(OperacionesBoton)))
                 .addGap(68, 68, 68)
                 .addComponent(ABCBoton)
                 .addGap(83, 83, 83))
@@ -84,17 +100,24 @@ public class JuegosNormal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(OperacionesBoton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(147, 147, 147)
                             .addComponent(JUegoSimonDice))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(196, 196, 196)
-                            .addComponent(ABCBoton))))
-                .addContainerGap(244, Short.MAX_VALUE))
+                            .addComponent(ABCBoton)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(OperacionesBoton)))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
+
+        TituloJuegosAdministrador.setFont(new java.awt.Font("Gramatika-BlackItalic", 1, 60)); // NOI18N
+        TituloJuegosAdministrador.setText("Juegos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,12 +126,22 @@ public class JuegosNormal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(295, 295, 295)
+                    .addComponent(TituloJuegosAdministrador)
+                    .addContainerGap(295, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(236, 236, 236)
+                    .addComponent(TituloJuegosAdministrador)
+                    .addContainerGap(236, Short.MAX_VALUE)))
         );
 
         pack();
@@ -117,8 +150,10 @@ public class JuegosNormal extends javax.swing.JFrame {
     private void JUegoSimonDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JUegoSimonDiceActionPerformed
         
         this.dispose();
-        boolean iniciandojuego = true;
-        SimonDice simonDice = new SimonDice(iniciandojuego);
+        
+        boolean juegoIniciado = true;
+        MapaSimonDice mapa = new MapaSimonDice();
+        mapa.setJuegoIniciado(juegoIniciado);
         
         
 
@@ -181,6 +216,9 @@ public class JuegosNormal extends javax.swing.JFrame {
     private javax.swing.JButton ABCBoton;
     private javax.swing.JButton JUegoSimonDice;
     private javax.swing.JButton OperacionesBoton;
+    private javax.swing.JLabel TituloJuegosAdministrador;
+    private javax.swing.JLabel TituloJuegosAdministrador1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

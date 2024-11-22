@@ -14,6 +14,7 @@ public class EntradaApp extends javax.swing.JFrame {
         TituloJuego = new javax.swing.JLabel();
         administradorBoton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -23,10 +24,8 @@ public class EntradaApp extends javax.swing.JFrame {
 
         TituloJuego.setBackground(new java.awt.Color(0, 0, 0));
         TituloJuego.setFont(new java.awt.Font("Gramatika-BlackItalic", 1, 60)); // NOI18N
-        TituloJuego.setForeground(new java.awt.Color(0, 0, 0));
         TituloJuego.setText("Juego de memoria");
 
-        administradorBoton.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\Engranaje sin fondo.png")); // NOI18N
         administradorBoton.setBorderPainted(false);
         administradorBoton.setContentAreaFilled(false);
         administradorBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -35,9 +34,17 @@ public class EntradaApp extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\Usuario sin fondo.png")); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Usuario sin fondo.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -49,20 +56,27 @@ public class EntradaApp extends javax.swing.JFrame {
                     .addComponent(TituloJuego)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(234, 234, 234)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addGap(132, 132, 132)
                         .addComponent(administradorBoton)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(TituloJuego)
-                .addGap(106, 106, 106)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(administradorBoton)
-                    .addComponent(jButton1))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(administradorBoton)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton2)))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,10 +97,21 @@ public class EntradaApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_administradorBotonActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        this.dispose();
+        
+        JuegosNormal juegos = new JuegosNormal();
+        juegos.setVisible(true);
+        juegos.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TituloJuego;
     private javax.swing.JButton administradorBoton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

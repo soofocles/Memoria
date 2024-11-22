@@ -39,10 +39,8 @@ public class JuegosAdministrador extends javax.swing.JFrame {
         PanelJuegosAdministrador.setBackground(new java.awt.Color(0, 204, 255));
 
         TituloJuegosAdministrador.setFont(new java.awt.Font("Gramatika-BlackItalic", 1, 60)); // NOI18N
-        TituloJuegosAdministrador.setForeground(new java.awt.Color(0, 0, 0));
         TituloJuegosAdministrador.setText("Juegos");
 
-        JUegoSimonDiceAdministrador.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\Circulo de 4 colores.png")); // NOI18N
         JUegoSimonDiceAdministrador.setBorderPainted(false);
         JUegoSimonDiceAdministrador.setContentAreaFilled(false);
         JUegoSimonDiceAdministrador.addActionListener(new java.awt.event.ActionListener() {
@@ -51,11 +49,9 @@ public class JuegosAdministrador extends javax.swing.JFrame {
             }
         });
 
-        Operaciones.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\Operaciones.png")); // NOI18N
         Operaciones.setBorderPainted(false);
         Operaciones.setContentAreaFilled(false);
 
-        Palabras.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\ABC.png")); // NOI18N
         Palabras.setBorderPainted(false);
         Palabras.setContentAreaFilled(false);
         Palabras.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +60,6 @@ public class JuegosAdministrador extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\Estructura de datos\\Salida mas pequeÃ±o.png")); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -80,29 +75,28 @@ public class JuegosAdministrador extends javax.swing.JFrame {
             .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
                 .addGroup(PanelJuegosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
-                        .addGroup(PanelJuegosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
-                                .addGap(295, 295, 295)
-                                .addComponent(TituloJuegosAdministrador))
-                            .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(JUegoSimonDiceAdministrador)
-                                .addGap(90, 90, 90)
-                                .addComponent(Operaciones)
-                                .addGap(98, 98, 98)
-                                .addComponent(Palabras)))
-                        .addGap(0, 44, Short.MAX_VALUE))
+                        .addGap(86, 86, 86)
+                        .addComponent(JUegoSimonDiceAdministrador)
+                        .addGap(90, 90, 90)
+                        .addComponent(Operaciones)
+                        .addGap(98, 98, 98)
+                        .addComponent(Palabras)
+                        .addGap(0, 59, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelJuegosAdministradorLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
+            .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(TituloJuegosAdministrador)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelJuegosAdministradorLayout.setVerticalGroup(
             PanelJuegosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelJuegosAdministradorLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(17, 17, 17)
                 .addComponent(TituloJuegosAdministrador)
-                .addGap(78, 78, 78)
+                .addGap(121, 121, 121)
                 .addGroup(PanelJuegosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JUegoSimonDiceAdministrador)
                     .addComponent(Operaciones)

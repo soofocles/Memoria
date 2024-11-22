@@ -1,5 +1,7 @@
 package juego.de.memomria;
 
+import GUI.EntradaApp;
+import GUI.JuegosNormal;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -34,7 +36,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     public static ArrayList<Integer> patronJuego = new ArrayList<>();
     public static Random random;
     private boolean gameOver;
-    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = false, iniciandoJuego = true;
+    private static boolean esperandoPatron = false, esGanador = false, modoSupervivencia = true, iniciandoJuego = true;
     private static int tiempoSegundos = 0;
     private long startTime;
     private long elapsedTime;
@@ -59,7 +61,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         colores.put(8, "Color Personalizado");
     }
 
-    public SimonDice(boolean iniciandoJuego) {
+    public SimonDice() {
         // Crear la ventana principal (JFrame)
         frame = new JFrame("Simon");
         Panel = new JPanel();
@@ -113,6 +115,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         patronesConseguidos = 0;
         gameOver = false;
         esGanador = false;
+        frame.setVisible(true);
         startTime = System.currentTimeMillis();
         isTimerRunning = true;  // Cronómetro está activo
         tiepo.start();
@@ -125,7 +128,14 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
 
     public static void main(String[] args) {
         
-        simon = new SimonDice(iniciandoJuego);
+        MapaSimonDice mapa = new MapaSimonDice();
+        iniciandoJuego = mapa.isJuegoIniciado();
+        
+        if(iniciandoJuego){
+        simon = new SimonDice();}
+        else {
+            EntradaApp entrada = new EntradaApp();
+        }
     }
 
     public void Iniciar() {
@@ -134,7 +144,6 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
         oscuro = 2;
         flash = 0;
         ticks = 0;
-        frame.setVisible(true);
         renderizado.repaint();
         startTime = System.currentTimeMillis();
         isTimerRunning = true;
@@ -195,10 +204,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
     }
 
     void paint(Graphics2D grafico) {
-        
-        while (iniciandoJuego == true) {            
-            
-        
+                     
 
         int circleWidth = 1000 / 2;
         int circleHeight = 1000 / 2;
@@ -277,7 +283,7 @@ public class SimonDice extends JFrame implements ActionListener, MouseListener {
             grafico.setColor(Color.WHITE);
             grafico.drawString(indicePatron + "/" + patronJuego.size(), width - 200, 300);
         }
-        }
+        
     }
 
     @Override
